@@ -1,0 +1,18 @@
+services:
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5435:5435"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - PGPORT=5435
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=dev
+      - POSTGRES_DB=playground
+
+volumes:
+  postgres_data:
+
