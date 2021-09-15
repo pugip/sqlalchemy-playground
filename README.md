@@ -30,3 +30,23 @@ poetry shell
 ```commandline
 pip install -r requirements.txt
 ```
+
+# Running
+
+## DB (Postgres)
+
+To start the DB:
+```commandline
+docker-compose up db
+```
+
+To shutdown the DB:
+```commandline
+docker-compose down
+```
+
+## Playground files
+
+```commandline
+python main.py
+```
