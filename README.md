@@ -48,5 +48,9 @@ docker-compose down
 ## Playground files
 
 ```commandline
-python main.py
+python examples/<file>.py
+```
+For example:
+```commandline
+python examples/constraints.py
 ```
