@@ -30,7 +30,7 @@ Base = declarative_base()
 
 
 class User(Base):
-    __tablename__ = 'user'
+    __tablename__ = "user"
     id = Column(Integer, primary_key=True)
     name = Column(String)
 
@@ -43,22 +43,24 @@ class User(Base):
     #
     # Without `uselist`, this attribute would take an array,
     # like in many-to-many & many-to-one relations.
-    address = relationship("Address", backref=backref("user", uselist=False), uselist=False)
+    address = relationship(
+        "Address", backref=backref("user", uselist=False), uselist=False
+    )
     vehicles = relationship("Vehicle", backref="user")
 
 
 class Vehicle(Base):
-    __tablename__ = 'vehicle'
+    __tablename__ = "vehicle"
     id = Column(Integer, primary_key=True)
     license_plate = Column(String)
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey("user.id"))
 
 
 class Address(Base):
-    __tablename__ = 'address'
+    __tablename__ = "address"
     id = Column(Integer, primary_key=True)
     email = Column(String)
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey("user.id"))
 
 
 engine = create_engine("postgresql://dev:dev@localhost:5435/playground")
@@ -73,7 +75,7 @@ with session.begin():
     user = User(
         name="mike",
         address=Address(email="mike@test.com"),
-        vehicles=[Vehicle(license_plate="QWERTY")]
+        vehicles=[Vehicle(license_plate="QWERTY")],
     )
     session.add(user)
 

@@ -1,4 +1,12 @@
-from sqlalchemy import create_engine, Column, Integer, ForeignKey, Text, UniqueConstraint, insert
+from sqlalchemy import (
+    create_engine,
+    Column,
+    Integer,
+    ForeignKey,
+    Text,
+    UniqueConstraint,
+    insert,
+)
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -15,9 +23,7 @@ class Project(Base):
 
 class Task(Base):
     __tablename__ = "task"
-    __table_args__ = (
-        UniqueConstraint("name"),
-    )
+    __table_args__ = (UniqueConstraint("name"),)
 
     id = Column(Integer, primary_key=True)
     name = Column(Text, nullable=False)
@@ -51,16 +57,13 @@ except IntegrityError:
     print("integrity error happened!")
 
 # Here's another way of executing statements:
-result = session.execute(
-    insert(Project),
-    [{'id': 1}, {'id': 6}]
-)
+result = session.execute(insert(Project), [{"id": 1}, {"id": 6}])
 _ = session.execute(
     insert(Task),
     [
-        {'name': 'karen', 'project_id': 1},
-        {'name': 'richard', 'project_id': 2},
-    ]
+        {"name": "karen", "project_id": 1},
+        {"name": "richard", "project_id": 2},
+    ],
 )
 
 # For Task, ondelete="CASCADE" means that tasks will get deleted when a parent
@@ -71,4 +74,4 @@ session.commit()
 session.refresh(project)
 session.delete(project)
 session.commit()
-print('done')
+print("done")
